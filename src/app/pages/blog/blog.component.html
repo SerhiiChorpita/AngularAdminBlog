@@ -1,0 +1,10 @@
+<div class="container-fluid main-container px-4">
+    <ng-container *ngFor="let post of userAllPosts">
+        <div class="block-posts m-3">
+            <img class="block-posts__post-image" [src]="post.imageUrl">
+            <p class="block-posts__author">{{ post.author }}</p>
+            <p class="block-posts__title">{{ post.title }}</p>
+            <p class="block-posts__text">{{ post.text }}</p>
+        </div>
+    </ng-container>
+</div>

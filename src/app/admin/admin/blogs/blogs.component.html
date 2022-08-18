@@ -1,0 +1,64 @@
+<div class="container-fluid d-flex flex-row ">
+    <div class="container col-2">
+        <button type="button" class="btn btn-dark w-100 text-start">Blogs</button>
+    </div>
+    <div class="container col-10 mb-2">
+        <div class="container-fluid d-flex flex-column">
+            <div class="container ">
+                <form>
+                    <div class="mb-3 w-100">
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="title here.. "
+                            [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-floating mb-3 w-100">
+                        <textarea placeholder="text here.." class="form-control"
+                            style="height: 100px; appearance: textarea;" [(ngModel)]="text"
+                            [ngModelOptions]="{standalone: true}"></textarea>
+                    </div>
+
+                    <div class="mb-3 w-100">
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="author here.."
+                            [(ngModel)]="author" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <button *ngIf="editStatus" type="button" class="btn btn-dark w-30 text-start" (click)="getPost()"
+                        [disabled]="!title||!text||!author">Add</button>
+                    <button *ngIf="!editStatus" type="button" class="btn btn-light w-30 text-start"
+                        (click)="savePost()">Save edit</button>
+                </form>
+            </div>
+            <hr class="mx-3">
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Text</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let post of adminAllPosts; index as i">
+                            <tr>
+                                <td>{{post.id}}</td>
+                                <td>{{post.title}}</td>
+                                <td>{{post.text| slice:0:20}} <span *ngIf="post.text.length>20">...</span></td>
+                                <td>{{post.author|uppercase}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-dark w-30 text-start"
+                                        (click)="editPost(post)">Edit</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-dark w-40 text-start"
+                                        (click)="deletePost(post)" [disabled]="!editStatus">Delete</button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
